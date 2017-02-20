@@ -1,0 +1,16 @@
+{
+  "name": "asd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --host  127.0.0.1 --port 8890  --inline --hot "
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "echarts": "^3.4.0",
+    "html-webpack-plugin": "^2.28.0",
+    "webpack": "^2.2.1"
+  }
+}
