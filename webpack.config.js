@@ -4,19 +4,34 @@ var webpack=require("webpack");
 module.exports = {
 	entry : {
 		app : [
-			'webpack-dev-server/client?http://127.0.0.1:8890',
+			'webpack-dev-server/client?http://127.0.0.1:8892',
 			__dirname + "/src/js/main.js"
 		]
 	},
 	output : {
-		 publicPath: "http://127.0.0.1:8890/",
-		 path: __dirname+'/build/js',  //输出文件夹
-         filename:'[name].js'   //最终打包生成的文件名(just 文件名，不带路径的哦)
+		 publicPath: "http://127.0.0.1:8892/",
+		 path: __dirname+'/build/js', 
+         filename:'[name].js'   
+	},
+	resolve: {
+        alias: {
+            css: __dirname + '/src/css/',
+            js : __dirname + '/src/js/'
+        }
+    },
+	module : {
+		loaders : [
+		   {test:/\.js$/,loader:"babel-loader", query: { compact:true },exclude: /node_modules/},
+		   {test:/\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,loader:"file-loader" },
+           {test: /\.css$/,loader: 'style-loader!css-loader'},
+           {test: /\.(png|jpe?g|gif|svg)(\?\S*)?$/,loader: 'file-loader',query: {name: '[name].[ext]?[hash]'}}
+		]
 	},
 	plugins : [
 		 new HtmlWebpackPlugin({
-            filename:"index.html",  // 为了配合热编译
-            template: __dirname+'/src/index.html',//模板文件
+            filename:"index.html",  
+            // filename:__dirname + "/build/index.html", 
+            template: __dirname+'/src/index.html',
             inject:'body',
             hash:true,
             chunks:["app"]
